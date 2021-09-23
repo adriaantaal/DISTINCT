@@ -1,0 +1,58 @@
+[done] March 23:
+	ASP + uLED matrices
+	DISTINCT-GD
+	
+[done] March 25: 
+	Gaussian matrices
+	DISTINCT-GD
+	
+[done] March 26:
+	Gaussian matrices
+	DISTINCT-LSQR
+	DISTINCT-INV
+	
+[done] March 27: 
+	ASP + uLED matrices
+	DISTINCT-LSQR
+	DISTINCT-INV	
+
+
+March 29: 
+	IBIS					-> All algorithms perform badly, maybe this is because of the too high of an interpolation resolution. So it finds locations right next to it
+	DISTINCT-LSQR			-> Run with decimated matrices instead of submatrices
+	DISTINCT-INV	
+	
+	
+March 29: 
+	ASP + uLED matrices
+	DISTINCT-LSQR
+	DISTINCT-INV	
+	Addsize dynamically: addSize = L/2				-> This speeds up by a LOT, and doesnt sacrifice accuracy too much. Keep addSize = L/2
+	2D SL0 decreased max_contrast_ratio to 1e4		-> This increases both the accuracy and computing time by a lot. Keep at 1e3.
+	
+	
+May 03: comparison of DISTINCT improvements
+	V4 : latest data in paper
+	V5 : improved overhead calculations, us = abs(u), 
+	V6 : subtract lambda from gradconstdiag. 
+		 subtract lambda*sum((U'*Dpinv').*(Epinv*V)',2) from s, s=s>0
+	
+	Results:  	Gv6 is much more accurate than Gv5. Gv6 is slightly faster than GV4.
+				Gv5 is the fastest, but the FOM is highest for Gv6.
+				Subtracting lambda is an important addition!!
+				Impressive improvement
+				
+				SVv6 is the fastest due to removal of some eigenvalues
+				SVv6 is the least accurate.
+				SVv4 & SVv5 are equally accurate, SVv5 is marginally faster.
+				
+				Subtracting lambda has merit, but current SV derivation is wrong
+				Could try not removing the less than zero SV's after subtraction? 
+					-> that makes it even worse!!
+					
+	Try s2 = s - lambda*sum(pinv(D'*U).*pinv(V'*E)',2)
+		Improvement! Although absolutely marginal at L=32...
+		And goes down harder after L>32
+				
+				
+	
