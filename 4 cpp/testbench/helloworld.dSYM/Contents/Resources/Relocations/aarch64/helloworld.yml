@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/adriaantaal/Library/Mobile Documents/com~apple~CloudDocs/Documents/distinct/cpp/testbench/helloworld'
+relocations:     []
+...
